@@ -67,6 +67,7 @@ export const menu: MenuCategory[] = [
       { name: "Masala Chai", description: "Assam leaf, ginger, green cardamom, fresh milk.", price: 100 },
       { name: "Green Tea", description: "Darjeeling first flush, light and grassy.", price: 120 },
       { name: "Iced Tea", description: "Peach and lemongrass over crushed ice.", price: 150 },
+      { name: "Lemon Ice Tea", description: "Freshly brewed black tea, zesty lemon and a touch of honey.", price: 150 },
     ],
   },
   {
