@@ -4,6 +4,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Karla", ui-sans-serif, system-ui, sans-serif;
+  --color-blush: var(--blush);
+  --color-butter: var(--butter);
+  --color-rose: var(--rose);
+  --color-clay: var(--clay);
+  --color-sage: var(--sage);
+  --color-cream: var(--cream);
+}
+
 /*
  * Design system definition.
  *
