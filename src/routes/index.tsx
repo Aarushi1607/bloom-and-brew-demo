@@ -1,24 +1,98 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/site/Navbar";
+import { Hero } from "@/components/site/Hero";
+import { About } from "@/components/site/About";
+import { MenuSection } from "@/components/site/MenuSection";
+import { Gallery } from "@/components/site/Gallery";
+import { Reservation } from "@/components/site/Reservation";
+import { Contact } from "@/components/site/Contact";
+import { Footer } from "@/components/site/Footer";
+import { cafe, menu } from "@/data/cafe";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Brew & Bloom Café | Coffee, Food & Good Moments";
+const description =
+  "Discover Brew & Bloom Café — a cozy destination for handcrafted coffee, delicious food and memorable moments in Pune.";
+
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CafeOrCoffeeShop",
+          name: cafe.name,
+          description,
+          telephone: cafe.phone,
+          email: cafe.email,
+          servesCuisine: ["Coffee", "Breakfast", "Desserts"],
+          priceRange: "₹₹",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "123 Bloom Street",
+            addressLocality: "Pune",
+            addressRegion: "Maharashtra",
+            postalCode: "411001",
+            addressCountry: "IN",
+          },
+          openingHoursSpecification: [
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "08:00",
+              closes: "22:00",
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Saturday", "Sunday"],
+              opens: "08:00",
+              closes: "23:00",
+            },
+          ],
+          hasMenu: {
+            "@type": "Menu",
+            hasMenuSection: menu.map((c) => ({
+              "@type": "MenuSection",
+              name: c.title,
+              hasMenuItem: c.items.map((i) => ({
+                "@type": "MenuItem",
+                name: i.name,
+                description: i.description,
+                offers: { "@type": "Offer", price: i.price, priceCurrency: "INR" },
+              })),
+            })),
+          },
+          sameAs: [cafe.instagram],
+        }),
+      },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <MenuSection />
+        <Gallery />
+        <Reservation />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
