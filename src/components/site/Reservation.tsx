@@ -52,6 +52,7 @@ function generateTimeSlots() {
   const slots: { value: string; label: string }[] = [];
   for (let h = 10; h <= 22; h++) {
     for (let m = 0; m < 60; m += 15) {
+      if (h === 22 && m > 0) break;
       const value = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
       slots.push({ value, label: formatTime(value) });
     }
