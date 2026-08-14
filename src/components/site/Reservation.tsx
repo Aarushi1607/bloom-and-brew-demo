@@ -48,6 +48,20 @@ function formatTime(time24: string) {
   return `${h12}:${String(m).padStart(2, "0")} ${ampm}`;
 }
 
+function generateTimeSlots() {
+  const slots: { value: string; label: string }[] = [];
+  for (let h = 10; h <= 22; h++) {
+    for (let m = 0; m < 60; m += 15) {
+      if (h === 22 && m > 0) break;
+      const value = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+      slots.push({ value, label: formatTime(value) });
+    }
+  }
+  return slots;
+}
+
+const timeSlots = generateTimeSlots();
+
 function validate(values: FormValues, today: string) {
   const next: Partial<Record<keyof FormValues, string>> = {};
 
@@ -229,15 +243,23 @@ export function Reservation() {
                   <label className={labelCls} htmlFor="time">
                     Time
                   </label>
-                  <input
+                  <select
                     id="time"
                     name="time"
-                    type="time"
                     value={values.time}
                     onChange={handleChange}
                     aria-invalid={!!errors.time}
                     className={`${field} ${errors.time ? fieldError : ""}`}
-                  />
+                  >
+                    <option value="" disabled>
+                      Select a time
+                    </option>
+                    {timeSlots.map((slot) => (
+                      <option key={slot.value} value={slot.value}>
+                        {slot.label}
+                      </option>
+                    ))}
+                  </select>
                   {errors.time && <p className={errorCls}>{errors.time}</p>}
                 </div>
                 <div>
