@@ -26,8 +26,11 @@ function getTodayLocaleISO() {
 }
 
 function formatDate(iso: string) {
-  const [year, month, day] = iso.split("-").map(Number);
-  const date = new Date(year, month - 1, day);
+  const [yearStr, monthStr, dayStr] = iso.split("-");
+  const year = Number(yearStr ?? 0);
+  const month = Number(monthStr ?? 0) - 1;
+  const day = Number(dayStr ?? 0);
+  const date = new Date(year, month, day);
   return date.toLocaleDateString("en-IN", {
     weekday: "long",
     year: "numeric",
@@ -37,7 +40,9 @@ function formatDate(iso: string) {
 }
 
 function formatTime(time24: string) {
-  const [h, m] = time24.split(":").map(Number);
+  const [hourStr, minuteStr] = time24.split(":");
+  const h = Number(hourStr ?? 0);
+  const m = Number(minuteStr ?? 0);
   const ampm = h >= 12 ? "PM" : "AM";
   const h12 = h % 12 || 12;
   return `${h12}:${String(m).padStart(2, "0")} ${ampm}`;
