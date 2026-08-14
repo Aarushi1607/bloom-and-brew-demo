@@ -61,7 +61,7 @@ function validate(values: FormValues, today: string) {
   const phone = values.phone.trim();
   if (!phone) {
     next.phone = "Please enter your phone number.";
-  } else if (!/^[\d\s+()\-]{7,}$/.test(phone)) {
+  } else if (!/^[\d\s+()-]{7,}$/.test(phone)) {
     next.phone = "Please enter a valid phone number.";
   } else if ((phone.match(/\d/g) ?? []).length < 10) {
     next.phone = "Phone number must include at least 10 digits.";
