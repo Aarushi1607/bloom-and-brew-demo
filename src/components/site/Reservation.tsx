@@ -45,11 +45,11 @@ export function Reservation() {
               of eight or more, please call us directly.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Cta href={cafe.whatsapp} target="_blank" rel="noopener noreferrer" variant="outline">
+                Contact on WhatsApp
+              </Cta>
               <Cta href={cafe.phoneHref} variant="outline">
                 Call Us
-              </Cta>
-              <Cta href={cafe.whatsapp} target="_blank" rel="noopener noreferrer" variant="outline">
-                Order on WhatsApp
               </Cta>
             </div>
           </Reveal>
