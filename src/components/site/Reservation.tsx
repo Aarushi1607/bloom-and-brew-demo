@@ -48,6 +48,19 @@ function formatTime(time24: string) {
   return `${h12}:${String(m).padStart(2, "0")} ${ampm}`;
 }
 
+function generateTimeSlots() {
+  const slots: { value: string; label: string }[] = [];
+  for (let h = 10; h <= 22; h++) {
+    for (let m = 0; m < 60; m += 15) {
+      const value = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+      slots.push({ value, label: formatTime(value) });
+    }
+  }
+  return slots;
+}
+
+const timeSlots = generateTimeSlots();
+
 function validate(values: FormValues, today: string) {
   const next: Partial<Record<keyof FormValues, string>> = {};
 
