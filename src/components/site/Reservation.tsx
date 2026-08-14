@@ -242,15 +242,23 @@ export function Reservation() {
                   <label className={labelCls} htmlFor="time">
                     Time
                   </label>
-                  <input
+                  <select
                     id="time"
                     name="time"
-                    type="time"
                     value={values.time}
                     onChange={handleChange}
                     aria-invalid={!!errors.time}
                     className={`${field} ${errors.time ? fieldError : ""}`}
-                  />
+                  >
+                    <option value="" disabled>
+                      Select a time
+                    </option>
+                    {timeSlots.map((slot) => (
+                      <option key={slot.value} value={slot.value}>
+                        {slot.label}
+                      </option>
+                    ))}
+                  </select>
                   {errors.time && <p className={errorCls}>{errors.time}</p>}
                 </div>
                 <div>
