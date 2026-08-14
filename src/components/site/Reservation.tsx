@@ -99,7 +99,9 @@ export function Reservation() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormValues, string>>>({});
   const [open, setOpen] = useState(false);
 
-  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) {
     const { name, value } = e.target;
     setValues((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormValues]) {
@@ -284,12 +286,8 @@ export function Reservation() {
 
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Portal>
-          <Dialog.Overlay
-            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-all duration-300 data-[state=open]:opacity-100 data-[state=closed]:opacity-0"
-          />
-          <Dialog.Content
-            className="fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-border bg-card p-6 shadow-lift transition-all duration-300 data-[state=open]:opacity-100 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=closed]:scale-95 sm:p-8"
-          >
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-all duration-300 data-[state=open]:opacity-100 data-[state=closed]:opacity-0" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-3xl border border-border bg-card p-6 shadow-lift transition-all duration-300 data-[state=open]:opacity-100 data-[state=closed]:opacity-0 data-[state=open]:scale-100 data-[state=closed]:scale-95 sm:p-8">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -308,12 +306,12 @@ export function Reservation() {
               Reservation Request Ready
             </Dialog.Title>
             <Dialog.Description className="mt-3 text-center leading-relaxed text-muted-foreground">
-              Your request for {guestLabel} at {formatTime(values.time)} on {formatDate(values.date)}{" "}
-              is ready.
+              Your request for {guestLabel} at {formatTime(values.time)} on{" "}
+              {formatDate(values.date)} is ready.
             </Dialog.Description>
             <p className="mt-3 text-center leading-relaxed text-muted-foreground">
-              Please send the request through WhatsApp to contact Brew & Bloom. The café will confirm
-              your reservation via WhatsApp.
+              Please send the request through WhatsApp to contact Brew & Bloom. The café will
+              confirm your reservation via WhatsApp.
             </p>
             <div className="mt-7 flex flex-col gap-3">
               <CtaButton onClick={handleConfirm} className="w-full">

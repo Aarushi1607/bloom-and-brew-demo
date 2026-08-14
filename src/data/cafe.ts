@@ -16,12 +16,12 @@ export const cafe = {
   phone: "+91 98765 43210",
   phoneHref: "tel:+919876543210",
   whatsappNumber: "919999999999",
-  whatsapp: "https://wa.me/919999999999?text=Hi%20Brew%20%26%20Bloom%2C%20I%27d%20like%20to%20book%20a%20table.",
+  whatsapp:
+    "https://wa.me/919999999999?text=Hi%20Brew%20%26%20Bloom%2C%20I%27d%20like%20to%20book%20a%20table.",
   email: "hello@brewandbloom.in",
   instagram: "https://instagram.com/brewandbloom",
   maps: "https://www.google.com/maps/search/?api=1&query=123+Bloom+Street+Pune+Maharashtra",
-  mapEmbed:
-    "https://www.google.com/maps?q=Bloom%20Street%20Pune%20Maharashtra&output=embed",
+  mapEmbed: "https://www.google.com/maps?q=Bloom%20Street%20Pune%20Maharashtra&output=embed",
   hours: [
     { days: "Monday – Friday", time: "8:00 AM – 10:00 PM" },
     { days: "Saturday – Sunday", time: "8:00 AM – 11:00 PM" },
@@ -52,7 +52,11 @@ export const menu: MenuCategory[] = [
     imageAlt: "Cappuccino with heart latte art in a blush pink cup",
     items: [
       { name: "Espresso", description: "Double shot, thick crema, chocolate finish.", price: 120 },
-      { name: "Cappuccino", description: "Velvet microfoam over a balanced house blend.", price: 160 },
+      {
+        name: "Cappuccino",
+        description: "Velvet microfoam over a balanced house blend.",
+        price: 160,
+      },
       { name: "Café Latte", description: "Slow-steamed milk, soft and rounded.", price: 170 },
       { name: "Mocha", description: "Dark 62% couverture stirred into espresso.", price: 190 },
       { name: "Cold Coffee", description: "Overnight brew, blended cold with milk.", price: 180 },
@@ -65,10 +69,18 @@ export const menu: MenuCategory[] = [
     image: teaImg,
     imageAlt: "Glass cup of masala chai with cinnamon and star anise",
     items: [
-      { name: "Masala Chai", description: "Assam leaf, ginger, green cardamom, fresh milk.", price: 100 },
+      {
+        name: "Masala Chai",
+        description: "Assam leaf, ginger, green cardamom, fresh milk.",
+        price: 100,
+      },
       { name: "Green Tea", description: "Darjeeling first flush, light and grassy.", price: 120 },
       { name: "Iced Tea", description: "Peach and lemongrass over crushed ice.", price: 150 },
-      { name: "Lemon Ice Tea", description: "Freshly brewed black tea, zesty lemon and a touch of honey.", price: 150 },
+      {
+        name: "Lemon Ice Tea",
+        description: "Freshly brewed black tea, zesty lemon and a touch of honey.",
+        price: 150,
+      },
     ],
   },
   {
@@ -78,10 +90,26 @@ export const menu: MenuCategory[] = [
     image: breakfastImg,
     imageAlt: "Avocado toast on sourdough with microgreens and chilli",
     items: [
-      { name: "Avocado Toast", description: "Sourdough, smashed avocado, chilli, microgreens.", price: 220 },
-      { name: "Classic Pancakes", description: "Three buttermilk stacks, berries, honey butter.", price: 240 },
-      { name: "Grilled Sandwich", description: "Cheddar, roast veg and pesto on country bread.", price: 210 },
-      { name: "Garlic Cheese Toast", description: "Confit garlic butter, mozzarella, herbs.", price: 180 },
+      {
+        name: "Avocado Toast",
+        description: "Sourdough, smashed avocado, chilli, microgreens.",
+        price: 220,
+      },
+      {
+        name: "Classic Pancakes",
+        description: "Three buttermilk stacks, berries, honey butter.",
+        price: 240,
+      },
+      {
+        name: "Grilled Sandwich",
+        description: "Cheddar, roast veg and pesto on country bread.",
+        price: 210,
+      },
+      {
+        name: "Garlic Cheese Toast",
+        description: "Confit garlic butter, mozzarella, herbs.",
+        price: 180,
+      },
     ],
   },
   {
@@ -91,15 +119,27 @@ export const menu: MenuCategory[] = [
     image: dessertImg,
     imageAlt: "Slice of New York cheesecake with berry compote",
     items: [
-      { name: "Chocolate Brownie", description: "Fudgy centre, sea salt, warm on request.", price: 180 },
-      { name: "New York Cheesecake", description: "Slow-baked, seasonal berry compote.", price: 220 },
+      {
+        name: "Chocolate Brownie",
+        description: "Fudgy centre, sea salt, warm on request.",
+        price: 180,
+      },
+      {
+        name: "New York Cheesecake",
+        description: "Slow-baked, seasonal berry compote.",
+        price: 220,
+      },
       { name: "Tiramisu", description: "Espresso-soaked savoiardi, mascarpone cream.", price: 240 },
     ],
   },
 ];
 
 export const gallery = [
-  { src: interiorImg, alt: "Sunlit café corner with rattan chairs and hanging plants", span: "tall" },
+  {
+    src: interiorImg,
+    alt: "Sunlit café corner with rattan chairs and hanging plants",
+    span: "tall",
+  },
   { src: coffeeImg, alt: "Overhead shot of a cappuccino on cream linen", span: "normal" },
   { src: pancakesImg, alt: "Stack of buttermilk pancakes with berries and honey", span: "normal" },
   { src: peopleImg, alt: "Two friends laughing over coffee at Brew & Bloom", span: "tall" },
