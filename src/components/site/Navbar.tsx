@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import logo from "@/assets/logo.png";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { cafe, navLinks } from "@/data/cafe";
 import { Cta } from "./Cta";
 import { cn } from "@/lib/utils";
@@ -36,28 +35,34 @@ export function Navbar() {
         aria-label="Primary"
         className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-3 sm:px-8 lg:py-4"
       >
-        <a href="#home" className="flex min-w-0 items-center gap-2.5">
-          <img src={logo} alt="" width={512} height={512} className="h-9 w-9 shrink-0" />
-          <span className="truncate font-display text-lg font-semibold tracking-tight sm:text-xl">
-            {cafe.name}
+        <a href="#home" className="flex min-w-0 items-center gap-3">
+          <span
+            aria-hidden
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-primary/40 font-display text-[0.7rem] tracking-tight text-primary"
+          >
+            B&amp;B
+          </span>
+          <span className="truncate font-display text-xl tracking-tight sm:text-2xl">
+            Brew <span className="italic">&amp;</span> Bloom
           </span>
         </a>
 
         <div className="flex items-center gap-1">
-          <ul className="mr-2 hidden items-center gap-1 lg:flex">
+          <ul className="mr-4 hidden items-center gap-1 lg:flex">
             {navLinks.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
-                  className="rounded-full px-4 py-2 text-sm font-medium text-foreground/75 transition-colors hover:bg-secondary/70 hover:text-foreground"
+                  className="px-4 py-2 text-sm text-foreground/75 transition-colors hover:text-primary"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <Cta href="#reserve" className="hidden px-5 py-2.5 sm:inline-flex">
-            Reserve a Table
+          <Cta href="#reserve" className="hidden px-6 py-3.5 sm:inline-flex">
+            Reserve a table
+            <ArrowUpRight className="h-4 w-4" />
           </Cta>
           <button
             type="button"

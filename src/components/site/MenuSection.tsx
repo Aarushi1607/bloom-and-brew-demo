@@ -1,75 +1,91 @@
-import { menu, type MenuCategory } from "@/data/cafe";
-import { Cta } from "./Cta";
+import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { menu } from "@/data/cafe";
 import { Reveal } from "./Reveal";
+import { cn } from "@/lib/utils";
 
-function Category({ category, flip }: { category: MenuCategory; flip: boolean }) {
+export function MenuSection() {
+  const [active, setActive] = useState(menu[0]!.id);
+  const category = menu.find((c) => c.id === active) ?? menu[0]!;
+
   return (
-    <Reveal className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-      <div className={flip ? "lg:order-2" : undefined}>
-        <img
-          src={category.image}
-          alt={category.imageAlt}
-          width={1000}
-          height={1000}
-          loading="lazy"
-          className="h-56 w-full rounded-2xl object-cover shadow-soft transition-transform duration-500 hover:scale-[1.02] sm:h-72 lg:h-full lg:max-h-[26rem]"
-        />
-      </div>
-      <div>
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
-          <h3 className="font-display text-2xl sm:text-3xl">{category.title}</h3>
-          <p className="text-sm text-muted-foreground">{category.note}</p>
-        </div>
-        <ul className="mt-6 divide-y divide-border/70">
-          {category.items.map((item) => (
-            <li key={item.name} className="flex items-start gap-4 py-4">
+    <section id="menu" className="scroll-mt-24 bg-blush/40 py-20 sm:py-28">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <Reveal className="grid gap-10 lg:grid-cols-2 lg:items-end">
+          <div>
+            <p className="eyebrow">The menu</p>
+            <h2 className="mt-5 font-display text-3xl leading-[1.1] sm:text-4xl lg:text-5xl">
+              Something lovely,
+              <br />
+              <span className="italic text-rose">every hour.</span>
+            </h2>
+            <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
+              Comforting classics, bright little surprises, and coffee worth slowing down for.
+            </p>
+          </div>
+
+          <div
+            role="tablist"
+            aria-label="Menu categories"
+            className="-mb-px flex flex-wrap gap-x-8 gap-y-2 border-b border-primary/15 lg:justify-end"
+          >
+            {menu.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                role="tab"
+                aria-selected={c.id === active}
+                onClick={() => setActive(c.id)}
+                className={cn(
+                  "-mb-px border-b-2 pb-3 text-sm transition-colors",
+                  c.id === active
+                    ? "border-primary font-semibold text-foreground"
+                    : "border-transparent text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {c.title}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <div className="mt-12 grid gap-x-16 border-t border-primary/15 sm:mt-14 md:grid-cols-2">
+          {category.items.map((item, i) => (
+            <div
+              key={item.name}
+              className="flex items-start gap-5 border-b border-primary/15 py-7"
+            >
+              <span className="pt-2 text-xs tracking-widest text-primary/60">
+                {String(i + 1).padStart(2, "0")}
+              </span>
               <div className="min-w-0 flex-1">
-                <h4 className="font-display text-lg leading-snug">{item.name}</h4>
-                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="font-display text-xl sm:text-2xl">{item.name}</h3>
+                  <span className="shrink-0 font-display text-lg text-primary">₹{item.price}</span>
+                </div>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>
               </div>
-              <span className="shrink-0 pt-0.5 font-display text-lg text-primary">
-                ₹{item.price}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Reveal>
-  );
-}
-
-export function MenuSection() {
-  return (
-    <section id="menu" className="scroll-mt-24 py-20 sm:py-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <Reveal className="max-w-2xl">
-          <p className="eyebrow">The menu</p>
-          <h2 className="mt-4 font-display text-3xl leading-tight sm:text-4xl lg:text-5xl">
-            Brewed, baked and plated in-house
-          </h2>
-          <p className="mt-5 leading-relaxed text-muted-foreground">
-            A short menu, done properly. Prices include taxes; ask us about the day&apos;s special
-            bake at the counter.
-          </p>
-        </Reveal>
-
-        <div className="mt-14 space-y-16 sm:mt-16 sm:space-y-20">
-          {menu.map((c, i) => (
-            <Category key={c.id} category={c} flip={i % 2 === 1} />
+            </div>
           ))}
         </div>
 
-        <Reveal className="mt-16 rounded-3xl bg-blush/50 px-6 py-10 text-center sm:px-12 sm:py-14">
-          <h3 className="font-display text-2xl sm:text-3xl">Want to enjoy it here?</h3>
-          <p className="mx-auto mt-3 max-w-md text-muted-foreground">
-            Tables fill up fast on weekends. Book yours in under a minute.
+        <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-muted-foreground">
+            All day breakfast · Vegetarian friendly · {category.note}
           </p>
-          <Cta href="#reserve" className="mt-7">
-            Reserve a Table
-          </Cta>
-        </Reveal>
+          <p className="flex items-center gap-3 text-sm text-muted-foreground">
+            Want to enjoy it here?
+            <a
+              href="#reserve"
+              className="inline-flex items-center gap-2 border-b border-primary/40 pb-1 font-semibold text-primary transition-colors hover:border-primary"
+            >
+              Reserve a table
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </p>
+        </div>
       </div>
     </section>
   );
