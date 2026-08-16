@@ -5,8 +5,8 @@ import { Reveal } from "./Reveal";
 import { cn } from "@/lib/utils";
 
 export function MenuSection() {
-  const [active, setActive] = useState(menu[0].id);
-  const category = menu.find((c) => c.id === active) ?? menu[0];
+  const [active, setActive] = useState(menu[0]!.id);
+  const category = menu.find((c) => c.id === active) ?? menu[0]!;
 
   return (
     <section id="menu" className="scroll-mt-24 bg-blush/40 py-20 sm:py-28">
